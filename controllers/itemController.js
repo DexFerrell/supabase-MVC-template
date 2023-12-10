@@ -17,7 +17,10 @@ exports.getItems =  async (req, res) => {
 
 // Create
 exports.createItem = async (req, res) => {
-  const {data, error} = await supabase.from('Items').insert([req.body])
+  const {data, error} = await supabase
+    .from('Items')
+    .insert([req.body])
+    .order('id', {ascending: true})
   if (error) {
     console.error(error)
     res.redirect('/item?error=true')
